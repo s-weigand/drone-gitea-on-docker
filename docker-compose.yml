@@ -10,11 +10,12 @@ services:
       - env/.env.gitea
     ports:
       - "3000:3000"
-      - "222:22"
+      - "222:222"
     networks:
       - cicd_net
     volumes:
       - ./gitea:/data
+      - ./certs:/data/certs
       # - ./gpg:/home/git/.gnupg:ro
 
   drone:
@@ -36,6 +37,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./drone:/data
+      - ./certs:/data/certs
 
   drone-runner:
     container_name: drone-runner
